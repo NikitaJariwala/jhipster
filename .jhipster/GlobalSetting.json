@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "setting_name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "setting_value",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "settingType",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180103115315",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "global_setting",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

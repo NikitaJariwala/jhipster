@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "settingName",
+            "otherEntityName": "globalSetting",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "setting_name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "userSettingValue",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20180104124101",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "user_setting",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -1,0 +1,70 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myUserSettingLabel"
+            jhiTranslate="jipsterDemoApp.userSetting.home.createOrEditLabel">Create or edit a User Setting</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!userSetting.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="userSetting.id" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="jipsterDemoApp.userSetting.settingName"
+                   for="field_settingName">Setting Name</label>
+            <select class="form-control" id="field_settingName" name="settingName" [(ngModel)]="userSetting.settingName"
+                    (change)="selectValue($event)">
+                <option
+                    [ngValue]="globalSettingOption.id === userSetting.settingName?.id ? userSetting.settingName : globalSettingOption"
+                    *ngFor="let globalSettingOption of globalsettings; trackBy: trackGlobalSettingById">
+                    {{globalSettingOption.setting_name}}
+                </option>
+            </select>
+        </div>
+
+        <!--<div class="form-group">-->
+            <!--<label class="form-control-label" jhiTranslate="jipsterDemoApp.userSetting.userSettingValue"-->
+                   <!--for="field_userSettingValue">User Setting Value</label>-->
+            <!--<input type="text" class="form-control" name="userSettingValue" id="field_userSettingValue"-->
+                   <!--[(ngModel)]="userSetting.userSettingValue" required/>-->
+            <!--<div [hidden]="!(editForm.controls.userSettingValue?.dirty && editForm.controls.userSettingValue?.invalid)">-->
+                <!--<small class="form-text text-danger"-->
+                       <!--[hidden]="!editForm.controls.userSettingValue?.errors?.required"-->
+                       <!--jhiTranslate="entity.validation.required">-->
+                    <!--This field is required.-->
+                <!--</small>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div *ngIf="mutipleValue" class="form-group">
+            <div *ngFor="let value of settingValue">
+                <input id="checkbox2" class="form-control" name="checkbox"  (change)="newFunction($event, value)" type="checkbox">
+                <label for="checkbox2">
+                    {{value}}
+                </label>
+            </div>
+        </div>
+
+        <div *ngIf="specifiValue" class="form-group">
+            <div *ngFor="let value of settingValue">
+                {{value}} <input id="checkbox3"  class="form-control" (change)="newFunctionRadio($event, value)" type="radio" name="radiogroup" >
+            </div>
+        </div>
+
+        <div *ngIf="anyValue" class="form-group">
+                <input id="anyvalueText" class="form-control" type="text" required>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+                <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+        </div>
+</form>

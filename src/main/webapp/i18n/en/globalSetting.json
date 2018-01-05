@@ -1,0 +1,23 @@
+{
+    "jipsterDemoApp": {
+        "globalSetting" : {
+            "home": {
+                "title": "Global Settings",
+                "createLabel": "Create a new Global Setting",
+                "createOrEditLabel": "Create or edit a Global Setting"
+            },
+            "created": "A new Global Setting is created with identifier {{ param }}",
+            "updated": "A Global Setting is updated with identifier {{ param }}",
+            "deleted": "A Global Setting is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Global Setting {{ id }}?"
+            },
+            "detail": {
+                "title": "Global Setting"
+            },
+            "setting_name": "Setting Name",
+            "setting_value": "Setting Value",
+            "settingType": "Setting Type"
+        }
+    }
+}
