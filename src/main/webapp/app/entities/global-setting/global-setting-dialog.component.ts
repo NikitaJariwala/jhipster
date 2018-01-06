@@ -44,6 +44,8 @@ export class GlobalSettingDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.globalSetting.settingType="Any Value";
+        this.globalSetting.setting_value="";
+
     }
 
     clear() {

@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="global_setting"/>
 
+        <addForeignKeyConstraint baseColumnNames="user_id_id"
+                                 baseTableName="user_setting"
+                                 constraintName="fk_user_setting_user_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

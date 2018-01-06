@@ -14,6 +14,10 @@
                 <a [routerLink]="['/global-setting', userSetting.settingName?.id]">{{userSetting.settingName?.setting_name}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="jipsterDemoApp.userSetting.userId">User Id</span></dt>
+        <dd>
+            {{userSetting.userId?.login}}
+        </dd>
     </dl>
 
     <button type="submit"

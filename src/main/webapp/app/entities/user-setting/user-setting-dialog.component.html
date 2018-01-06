@@ -17,7 +17,7 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="jipsterDemoApp.userSetting.settingName"
                    for="field_settingName">Setting Name</label>
-            <select class="form-control" id="field_settingName" name="settingName" [(ngModel)]="userSetting.settingName"
+            <select class="form-control" id="field_settingName" name="settingName" [disabled]="butDisabled" [(ngModel)]="userSetting.settingName"
                     (change)="selectValue($event)">
                 <option
                     [ngValue]="globalSettingOption.id === userSetting.settingName?.id ? userSetting.settingName : globalSettingOption"
@@ -40,23 +40,32 @@
                 <!--</small>-->
             <!--</div>-->
         <!--</div>-->
-        <div *ngIf="mutipleValue" class="form-group">
+        <div *ngIf="mutipleValue" class="form-check">
+            <div *ngFor="let value of settingValue; let $index = index">
+                <label class="container">
+                    {{value.name}}
+                <input class="form-check-input check" name="checkbox{{$index}}" [(ngModel)]="value.checked" (change)="newFunction($event, value)" type="checkbox">
+                <span class="checkmark"></span>
+                </label>
+
+            </div>
+        </div>
+
+        <div *ngIf="specifiValue" class="form-check">
             <div *ngFor="let value of settingValue">
-                <input id="checkbox2" class="form-control" name="checkbox"  (change)="newFunction($event, value)" type="checkbox">
-                <label for="checkbox2">
-                    {{value}}
+                <label class="containerradio">
+                    {{value.name}} <input type="radio" name="radiogroup" [value]="value.name" class="form-check-input" [(ngModel)]="radiovalue.name" (change)="newFunctionRadio($event, value)"  >
+                    <span class="checkmarkradio"></span>
                 </label>
             </div>
         </div>
-
-        <div *ngIf="specifiValue" class="form-group">
-            <div *ngFor="let value of settingValue">
-                {{value}} <input id="checkbox3"  class="form-control" (change)="newFunctionRadio($event, value)" type="radio" name="radiogroup" >
-            </div>
         </div>
 
         <div *ngIf="anyValue" class="form-group">
-                <input id="anyvalueText" class="form-control" type="text" required>
+            <label style="margin-left: 20px; margin-right: 20px;" for="anyvalueText">
+                Any Value
+            </label>
+                <input style="margin-left: 16px; margin-right: 20px; width: 96%;" [(ngModel)]="settinganyValue" id="anyvalueText" name="formInput" class="form-control" type="text" required>
         </div>
 
         <div class="modal-footer">

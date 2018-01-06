@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager, JhiParseLinks, JhiAlertService} from 'ng-jhipster';
 
-import { UserSetting } from './user-setting.model';
-import { UserSettingService } from './user-setting.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
+import {UserSetting} from './user-setting.model';
+import {UserSettingService} from './user-setting.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../shared';
 
 @Component({
     selector: 'jhi-user-setting',
@@ -13,8 +13,9 @@ import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../shared';
 })
 export class UserSettingComponent implements OnInit, OnDestroy {
 
-currentAccount: any;
+    currentAccount: any;
     userSettings: UserSetting[];
+    userSettingByUser = [];
     error: any;
     success: any;
     eventSubscriber: Subscription;
@@ -27,16 +28,15 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    i = 0;
 
-    constructor(
-        private userSettingService: UserSettingService,
-        private parseLinks: JhiParseLinks,
-        private jhiAlertService: JhiAlertService,
-        private principal: Principal,
-        private activatedRoute: ActivatedRoute,
-        private router: Router,
-        private eventManager: JhiEventManager
-    ) {
+    constructor(private userSettingService: UserSettingService,
+                private parseLinks: JhiParseLinks,
+                private jhiAlertService: JhiAlertService,
+                private principal: Principal,
+                private activatedRoute: ActivatedRoute,
+                private router: Router,
+                private eventManager: JhiEventManager) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe((data) => {
             this.page = data.pagingParams.page;
@@ -50,20 +50,23 @@ currentAccount: any;
         this.userSettingService.query({
             page: this.page - 1,
             size: this.itemsPerPage,
-            sort: this.sort()}).subscribe(
+            sort: this.sort()
+        }).subscribe(
             (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
+
     loadPage(page: number) {
         if (page !== this.previousPage) {
             this.previousPage = page;
             this.transition();
         }
     }
+
     transition() {
-        this.router.navigate(['/user-setting'], {queryParams:
-            {
+        this.router.navigate(['/user-setting'], {
+            queryParams: {
                 page: this.page,
                 size: this.itemsPerPage,
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
@@ -80,6 +83,7 @@ currentAccount: any;
         }]);
         this.loadAll();
     }
+
     ngOnInit() {
         this.loadAll();
         this.principal.identity().then((account) => {
@@ -95,6 +99,7 @@ currentAccount: any;
     trackId(index: number, item: UserSetting) {
         return item.id;
     }
+
     registerChangeInUserSettings() {
         this.eventSubscriber = this.eventManager.subscribe('userSettingListModification', (response) => this.loadAll());
     }
@@ -108,12 +113,19 @@ currentAccount: any;
     }
 
     private onSuccess(data, headers) {
+        this.userSettingByUser=[];
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
         // this.page = pagingParams.page;
-        this.userSettings = data;
+        for (this.i = 0; this.i < data.length; this.i++) {
+            if (data[this.i].userId.id == this.currentAccount.id) {
+                this.userSettingByUser.push(data[this.i]);
+            }
+        }
+        this.userSettings = this.userSettingByUser;
     }
+
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }

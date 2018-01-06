@@ -9,6 +9,7 @@ import { UserSettingDialogComponent } from '../../../../../../main/webapp/app/en
 import { UserSettingService } from '../../../../../../main/webapp/app/entities/user-setting/user-setting.service';
 import { UserSetting } from '../../../../../../main/webapp/app/entities/user-setting/user-setting.model';
 import { GlobalSettingService } from '../../../../../../main/webapp/app/entities/global-setting';
+import { UserService } from '../../../../../../main/webapp/app/shared';
 
 describe('Component Tests', () => {
 
@@ -25,6 +26,7 @@ describe('Component Tests', () => {
                 declarations: [UserSettingDialogComponent],
                 providers: [
                     GlobalSettingService,
+                    UserService,
                     UserSettingService
                 ]
             })

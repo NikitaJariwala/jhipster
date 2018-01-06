@@ -6,6 +6,14 @@
             "otherEntityName": "globalSetting",
             "relationshipType": "many-to-one",
             "otherEntityField": "setting_name"
+        },
+        {
+            "relationshipName": "userId",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userSetting"
         }
     ],
     "fields": [

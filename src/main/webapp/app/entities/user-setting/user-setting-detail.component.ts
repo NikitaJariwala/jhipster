@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { UserSetting } from './user-setting.model';
 import { UserSettingService } from './user-setting.service';
+import {Principal} from "../../shared/auth/principal.service";
 
 @Component({
     selector: 'jhi-user-setting-detail',
@@ -19,7 +20,7 @@ export class UserSettingDetailComponent implements OnInit, OnDestroy {
     constructor(
         private eventManager: JhiEventManager,
         private userSettingService: UserSettingService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
     ) {
     }
 
@@ -27,7 +28,6 @@ export class UserSettingDetailComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.load(params['id']);
         });
-       // this.userSetting.userSettingValue="nikita";
         this.registerChangeInUserSettings();
     }
 
@@ -36,6 +36,7 @@ export class UserSettingDetailComponent implements OnInit, OnDestroy {
             this.userSetting = userSetting;
         });
     }
+
     previousState() {
         window.history.back();
     }

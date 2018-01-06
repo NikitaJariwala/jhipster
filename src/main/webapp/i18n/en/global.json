@@ -83,9 +83,6 @@
         "field": {
             "id": "ID"
         },
-        "ribbon": {
-            "dev":"Development"
-        },
         "item-count": "Showing {{first}} - {{second}} of {{total}} items."
     },
     "entity": {

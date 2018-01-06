@@ -27,6 +27,9 @@ public class UserSetting implements Serializable {
     @ManyToOne
     private GlobalSetting settingName;
 
+    @ManyToOne
+    private User userId;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -60,6 +63,19 @@ public class UserSetting implements Serializable {
 
     public void setSettingName(GlobalSetting globalSetting) {
         this.settingName = globalSetting;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public UserSetting userId(User user) {
+        this.userId = user;
+        return this;
+    }
+
+    public void setUserId(User user) {
+        this.userId = user;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

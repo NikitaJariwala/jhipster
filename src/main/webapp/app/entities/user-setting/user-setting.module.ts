@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { JipsterDemoSharedModule } from '../../shared';
+import { JipsterDemoAdminModule } from '../../admin/admin.module';
 import {
     UserSettingService,
     UserSettingPopupService,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         JipsterDemoSharedModule,
+        JipsterDemoAdminModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

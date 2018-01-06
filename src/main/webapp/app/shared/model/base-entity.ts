@@ -3,4 +3,5 @@ export interface BaseEntity {
     id?: any;
     setting_value?:any;
     settingType?:any;
+    setting_name?:any;
 };
